@@ -1,0 +1,20 @@
+* Hostname was found in DNS cache
+*   Trying ::1...
+* connect to ::1 port 7000 failed: Connection refused
+*   Trying 127.0.0.1...
+* Connected to localhost (127.0.0.1) port 7000 (#0)
+> POST /ussd/send HTTP/1.1
+Host: localhost:7000
+Accept: */*
+Content-Type: application/json
+Content-Length: 192
+
+* upload completely sent off: 192 out of 192 bytes
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Date: Wed, 15 Apr 2015 14:13:29 GMT
+< Content-Length: 116
+* Server Jetty(8.0.0.M3) is not blacklisted
+< Server: Jetty(8.0.0.M3)
+< 
+* Connection #0 to host localhost left intact
