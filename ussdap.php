@@ -122,6 +122,21 @@ $responseMsg = array(
 
 );
 
+$jobdescription = array(
+    "english" => "Jobtitle
+
+the job description is where
+we discribe the job skills need
+and other stuff.
+",
+    "amharic" => "ሥራ አርእስት
+
+ሥራ አገላለጽ ነው የት እኛ ገለፀ ሥራ
+ጉብዝና ተፈላጊ እና ሌላ እቃ ሥራ
+አገላለጽ ነው የት እኛ ገለፀ ሥራ
+ጉብዝና ተፈላጊ እና ሌላ እቃ
+    "
+);
 
 
 
@@ -141,8 +156,15 @@ if ($ussdOperation  == "mo-init") {
 
 	$flag=0;
 
+    $joba = array("aList1","aList2","aList3","aList4","aList5","aList6");
+    $jobe = array("eList1","eList2","eList3","eList4","eList5","eList6");
   	$sessiondetails=  $operations->getSession($sessionId,$db);
   	$cuch_menu=$sessiondetails['menu'];
+    if(in_array($cuch_menu,$joba)){
+        $cuch_menu = "joba";
+    }elseif(in_array($cuch_menu,$jobe)){
+        $cuch_menu = "jobe";
+    }
   	$operations->session_id=$sessiondetails['sessionsid'];
 
 		switch($cuch_menu ){
@@ -252,6 +274,17 @@ if ($ussdOperation  == "mo-init") {
 			case "ivr":
 				$sender->ussd($sessionId,'You Purchased a large T-Shirt Your ID '.$receiver->getMessage(),$address ,'mt-fin');
 				break;
+            case "joba":
+                $operations->session_menu="main";
+                $operations->saveSesssion($db);
+                $sender->ussd($sessionId, $jobdescription["amharic"],$address );
+                break;
+            case "jobe":
+                $operations->session_menu="main";
+                $operations->saveSesssion($db);
+                $sender->ussd($sessionId, $jobdescription["english"],$address );
+                break;
+
 			default:
 				$operations->session_menu="main";
 				$operations->saveSesssion($db);
